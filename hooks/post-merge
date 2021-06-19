@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+from subprocess import PIPE, run
+def out(command):
+    result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+    return (result.stdout).strip()
+
+branch_name = out('git branch | grep "*" | sed "s/\* //"')
+reflog_message= out('git reflog -1')
+merged_branch_name=out('echo '+reflog_message+' | cut -d" " -f 4 | sed "s/://"')
+print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
+
+# check if merge into develop
+if branch_name == "develop":
+    #get branch type
+    branchType = merged_branch_name.split('-')[0]
+    #read in the version info
+    versionFile = open("version_info.txt","r")
+    version = versionFile.readline()
+    versionFile.close()
+    majMinFeat = version.split('.')
+    # update version number and change
+    versionFile = open("version_info.txt","w")
+    if branchType == "realease":
+        majMinFeat[0] = str(int(majMinFeat[0]) +1)
+    if branchType == 'feature':
+        majMinFeat[1] = str(int(majMinFeat[1]) +1)
+    elif branchType == 'patch':
+        majMinFeat[2] = str(int(majMinFeat[2]) +1)
+    versionFile.write('.'.join(majMinFeat))
+    versionFile.close()
+    print("[INFO] Version: " + '.'.join(majMinFeat))
