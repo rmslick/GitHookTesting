@@ -1,6 +1,1 @@
-<<<<<<< HEAD
-0.6.0
-asdfsadfasdf
-=======
 0.5.0
->>>>>>> develop
