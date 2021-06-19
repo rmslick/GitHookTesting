@@ -22,6 +22,4 @@ if not currentBranchType in branchTypes:
     print("[ERROR] Branch name not follow naming conventions.\n[HINT] Non master/develop branches must include hyphen.\n[HINT] Must follow [branchtype]-[descriptivename] format")
     print("[ABORT] Aborting. Commit not created.")
     sys.exit(1)
-if currentBranchType in devBranches:
-    out('git reset version.txt')
 sys.exit(0)
