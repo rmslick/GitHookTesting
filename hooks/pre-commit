@@ -23,5 +23,6 @@ if not currentBranchType in branchTypes:
     print("[ABORT] Aborting. Commit not created.")
     sys.exit(1)
 if currentBranchType in devBranches:
+    print("[INFO] Reset version.")
     out("git reset version.txt")
 sys.exit(0)
