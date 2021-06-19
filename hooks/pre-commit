@@ -12,7 +12,7 @@ branchTypes = ["develop","master","release","feature","patch","private"]
 currentBranchName = out("git rev-parse --abbrev-ref HEAD")
 print("[INFO] Working on: " +currentBranchName)
 # report hyphen error
-if currentBranchName != "develop" and currentBranchName != "master" and currentBranchName.find('-'):
+if currentBranchName != "develop" and currentBranchName != "master" and currentBranchName.find('-') == -1:
     print("[ERROR] Branch name not follow naming conventions.\n[HINT] Non master/develop branches must include hyphen.\n[HINT] Must follow [branchtype]-[descriptivename] format")
     print("[ABORT] Aborting. Commit not created.")
     sys.exit(1)

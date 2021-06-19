@@ -14,14 +14,16 @@ if branch_name == "develop":
     #get branch type
     branchType = merged_branch_name.split('-')[0]
     #read in the version info
-    versionFile = open("version_info.txt","r")
+    versionFile = open("version.txt","r")
     version = versionFile.readline()
     versionFile.close()
     majMinFeat = version.split('.')
     # update version number and change
-    versionFile = open("version_info.txt","w")
+    versionFile = open("version.txt","w")
     if branchType == "realease":
         majMinFeat[0] = str(int(majMinFeat[0]) +1)
+        majMinFeat[1] = '0'
+        majMinFeat[2] = '0'
     if branchType == 'feature':
         majMinFeat[1] = str(int(majMinFeat[1]) +1)
     elif branchType == 'patch':
