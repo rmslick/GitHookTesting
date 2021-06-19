@@ -24,5 +24,4 @@ if not currentBranchType in branchTypes:
     sys.exit(1)
 if currentBranchType in devBranches:
     out("git reset version.txt")
-    print("[INFO] Removed version.txt from index.")
 sys.exit(0)
