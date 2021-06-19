@@ -22,6 +22,8 @@ if branch_name == "develop":
     versionFile = open("version.txt","w")
     if branchType == "realease":
         majMinFeat[0] = str(int(majMinFeat[0]) +1)
+        majMinFeat[1] = '0'
+        majMinFeat[2] = '0'
     if branchType == 'feature':
         majMinFeat[1] = str(int(majMinFeat[1]) +1)
     elif branchType == 'patch':
