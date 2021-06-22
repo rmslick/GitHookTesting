@@ -35,7 +35,11 @@ if branch_name == "develop":
     versionFile.write('.'.join(majMinFeat))
     versionFile.close()
     #print("[INFO] Version: " + '.'.join(majMinFeat))
-    out("git add .")
-    out("git commit -m 'version updated' ")
-    out("git push origin develop")
-    print("Local and remote develop updated to version: "+'.'.join(majMinFeat))
+    pushVal = (input('Local version has changed. Update remotes? (y/n)')).lower()
+    if pushVal == 'y':
+        out("git add .")
+        out("git commit -m 'version updated' ")
+        out("git push origin develop")
+        print("Local and remote develop updated to version: "+'.'.join(majMinFeat))
+    else:
+        print("Remote not updated. Local and remote out of sync.")
