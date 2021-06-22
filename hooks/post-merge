@@ -35,7 +35,8 @@ if branch_name == "develop":
     versionFile.write('.'.join(majMinFeat))
     versionFile.close()
     #print("[INFO] Version: " + '.'.join(majMinFeat))
-    pushVal = (input('Local version has changed. Update remotes? (y/n)')).lower()
+    pushVal = input('Local version has changed. Update remotes? (y/n)')
+    pushVal = pushVal.lower()
     if pushVal == 'y':
         out("git add .")
         out("git commit -m 'version updated' ")
