@@ -37,7 +37,7 @@ if branch_name == "develop":
     versionFile.close()
     #print("[INFO] Version: " + '.'.join(majMinFeat))
     sys.stdin = open('/dev/tty')
-    pushVal = input('Local version has changed. Update remotes? (y/n)')
+    pushVal = input('Local version has changed. Update version in remote? (y/n)')
     if pushVal.strip().lower().startswith('y'):
         out("git add .")
         out("git commit -m 'version updated' ")
