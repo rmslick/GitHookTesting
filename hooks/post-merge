@@ -11,6 +11,10 @@ print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
 
 # check if merge into develop
 if branch_name == "develop":
+    # replace version file with what is in develop
+    print("[INFO] Pulling version.txt from origin develop.")
+    out('git fetch')
+    out('git checkout -m origin/develop version.txt')
     #get branch type
     branchType = merged_branch_name.split('-')[0]
     #read in the version info
@@ -30,4 +34,8 @@ if branch_name == "develop":
         majMinFeat[2] = str(int(majMinFeat[2]) +1)
     versionFile.write('.'.join(majMinFeat))
     versionFile.close()
-    print("[INFO] Version: " + '.'.join(majMinFeat))
+    #print("[INFO] Version: " + '.'.join(majMinFeat))
+    out("git add .")
+    out("git commit -m 'version updated' ")
+    out("git push origin develop")
+    print("Local and remote develop updated to version: "+'.'.join(majMinFeat))
