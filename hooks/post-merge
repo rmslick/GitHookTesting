@@ -41,6 +41,6 @@ if branch_name == "develop" and branchType in bumpBranches:
         out("git add .")
         out("git commit -m 'version updated' ")
         out("git push origin develop")
-        print("Local and remote develop updated to version: "+'.'.join(majMinFeat))
+        print("[INFO] Local and remote develop updated to version: "+'.'.join(majMinFeat))
     else:
         print("[WARN] Remote not updated. Local and remote out of sync.")
