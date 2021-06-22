@@ -44,4 +44,4 @@ if branch_name == "develop":
         out("git push origin develop")
         print("Local and remote develop updated to version: "+'.'.join(majMinFeat))
     else:
-        print("Remote not updated. Local and remote out of sync.")
+        print("[WARN] Remote not updated. Local and remote out of sync.")
