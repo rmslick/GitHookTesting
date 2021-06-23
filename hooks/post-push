@@ -8,7 +8,7 @@ def out(command):
 arg_list = ' '.join(sys.argv[1:])
 
 r_val = out('git push '+arg_list)
-print(r_val)
+print(out("$?"))
 print("returned")
 bump_branches = ["release","feature","patch"]
 develop_merge_history = (out('git log --oneline develop')).splitlines()
