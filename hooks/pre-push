@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from subprocess import PIPE, run
-import sys
+import sys, time
 def out(command):
     result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return (result.stdout).strip()
@@ -13,7 +13,7 @@ print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
 bumpBranches = ["realease",'feature','patch']
 branchType = merged_branch_name.split('-')[0]
 '''
-'''
+
 print("[INFO] Pre-push")
 versionFile = open("version.txt","r")
 version_local = (versionFile.readline()).strip()
@@ -21,20 +21,23 @@ versionFile.close()
 print("[INFO] "+version_local)
 out('git fetch')
 out('git checkout origin/develop version.txt')
+
 #out('git checkout -- origin/develop version.txt')
 versionFile = open("version.txt","r")
 version_remote = (versionFile.readline()).strip()
 versionFile.close()
+out("git checkout HEAD version.txt")
+
 print("[INFO] "+version_remote)
 if version_local != version_remote:
     print("[ABORT] PUSH ABORTED: Version file mismatch.")
     print("[ABORT] Local version is: "+str(version_local).strip())
     print("[ABORT] Remote version is: "+str(version_remote))
-    print("[HINT] Local version has been updated. Try:\n\tgit add version.txt\n\tgit commit -m 'Fix local v'\n\tgit xpush origin develop")
+    print("[HINT] Run git pull to update")
     sys.exit(1)
 print("[INFO] Versions match.")
 sys.exit(0)
-'''
+
 '''
 if branch_name == "develop" and branchType in bumpBranches:
     # replace version file with what is in develop
