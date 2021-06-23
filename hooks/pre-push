@@ -13,6 +13,7 @@ print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
 bumpBranches = ["realease",'feature','patch']
 branchType = merged_branch_name.split('-')[0]
 '''
+print("[INFO] Pre-push")
 versionFile = open("version.txt","r")
 version_local = (versionFile.readline()).strip()
 versionFile.close()

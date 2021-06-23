@@ -6,6 +6,8 @@ def out(command):
     return (result.stdout).strip()
 
 arg_list = ' '.join(sys.argv[1:])
+
+print("-----> Pushed")
 r_val = out('git push '+arg_list)
 
 bump_branches = ["release","feature","patch"]
