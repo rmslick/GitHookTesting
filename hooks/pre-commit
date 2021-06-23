@@ -13,11 +13,13 @@ devBranches = ["release","feature","patch","private"]
 # obtain current branch name
 currentBranchName = out("git rev-parse --abbrev-ref HEAD")
 # Sync effort
+'''
 if currentBranchName == 'develop':
     out('git fetch')
     out('git checkout -m origin/develop version.txt')
     print("[INFO] Up to date with develop.")
 print("[INFO] Working on: " +currentBranchName)
+'''
 # report hyphen error
 if currentBranchName != "develop" and currentBranchName != "master" and currentBranchName.find('-') == -1:
     print("[ERROR] Branch name not follow naming conventions.\n[HINT] Non master/develop branches must include hyphen.\n[HINT] Must follow [branchtype]-[descriptivename] format")
