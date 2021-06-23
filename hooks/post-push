@@ -45,9 +45,12 @@ if merged in bump_branches:
     print('.'.join(majMinFeat))
     versionFile.write('.'.join(majMinFeat))
     versionFile.close()
-
+    print("[INFO] Version updated locally")
+    '''
+    if 
     out('git add .')
     out('git commit -m "Bump version remote"')
     out('git push origin develop')
+    '''
 else:
     print("[INFO] Non version changing push.")
