@@ -13,10 +13,22 @@ print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
 bumpBranches = ["realease",'feature','patch']
 branchType = merged_branch_name.split('-')[0]
 '''
+versionFile = open("version.txt","r")
+version_local = (versionFile.readline()).strip()
+versionFile.close()
 print("[INFO] Stashing version file.")
 out('git fetch')
 out('git checkout -m origin/develop version.txt')
-
+versionFile = open("version.txt","r")
+version_remote = (versionFile.readline()).strip()
+versionFile.close()
+if version_local != version_remote:
+    print("[ABORT] PUSH ABORTED: Version file mismatch.")
+    print("[ABORT] Local version is: "+str(version_local).strip())
+    print("[ABORT] Remote version is: "+str(version_remote))
+    print("[HINT] Local version has been updated. Try:\n\tgit add version.txt\n\tgit commit -m 'Fix local v'\n\tgit xpush origin develop")
+    sys.exit(1)
+sys.exit(0)
 '''
 if branch_name == "develop" and branchType in bumpBranches:
     # replace version file with what is in develop
