@@ -15,7 +15,7 @@ develop_merge_history = (out('git log --oneline develop')).splitlines()
 merged = ""
 merged_into = ""
 for log in develop_merge_history:
-    if log.split()[1] == "Merge":
+    if log.split()[1] == "Merge" and log.split()[5] == "develop":
         merged = (log.split()[3]).strip('\"')
         merged = (log.split()[3]).strip('\'')
         merged_into = log.split()[5]
@@ -45,9 +45,9 @@ if merged in bump_branches:
     print('.'.join(majMinFeat))
     versionFile.write('.'.join(majMinFeat))
     versionFile.close()
-    #out('git add .')
-    #out('git stash')
-    #out('git commit -m "Bump version remote"')
-    #out('git push origin develop')
+
+    out('git add .')
+    out('git commit -m "Bump version remote"')
+    out('git push origin develop')
 else:
     print("[INFO] Non version changing push.")
