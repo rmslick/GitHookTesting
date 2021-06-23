@@ -15,7 +15,8 @@ currentBranchName = out("git rev-parse --abbrev-ref HEAD")
 # Sync effort
 if currentBranchName == 'develop':
     out('git fetch')
-    out('git checkout -- origin/develop version.txt')
+    #out('git checkout -- origin/develop version.txt')
+    out('reset HEAD version.txt')
     print("[INFO] Up to date with develop.")
 print("[INFO] Working on: " +currentBranchName)
 # report hyphen error
