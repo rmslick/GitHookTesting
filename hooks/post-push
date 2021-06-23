@@ -5,11 +5,11 @@ def out(command):
     result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return (result.stdout).strip()
 
-arg_list = ' '.join(sys.argv[1:])
+#arg_list = ' '.join(sys.argv[1:])
 
-out('git push '+arg_list)
-print(out("$?"))
-print("returned")
+#out('git push '+arg_list)
+#print(out("$?"))
+#print("returned")
 bump_branches = ["release","feature","patch"]
 develop_merge_history = (out('git log --oneline develop')).splitlines()
 merged = ""
