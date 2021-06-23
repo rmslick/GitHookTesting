@@ -4,7 +4,7 @@ import sys
 def out(command):
     result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return (result.stdout).strip()
-
+'''
 branch_name = out('git branch | grep "*" | sed "s/\* //"')
 reflog_message= out('git reflog -1')
 merged_branch_name=out('echo '+reflog_message+' | cut -d" " -f 4 | sed "s/://"')
@@ -12,6 +12,8 @@ print("[INFO] pre-push git hook invoked.")
 print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
 bumpBranches = ["realease",'feature','patch']
 branchType = merged_branch_name.split('-')[0]
+'''
+print("[INFO] Stashing version file.")
 out('git fetch')
 out('git checkout -m origin/develop version.txt')
 

@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+from subprocess import PIPE, run
+import sys
+def out(command):
+    result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+    return (result.stdout).strip()
+bump_branches = ["release","feature","patch"]
+develop_merge_history = (out('git log --oneline develop')).splitlines()
+merged = ""
+merged_into = ""
+for log in develop_merge_history:
+    if log.split()[1] == "Merge":
+        merged = (log.split()[3]).strip('\"')
+        merged = (log.split()[3]).strip('\'')
+        merged_into = log.split()[5]
+        break
+
+merged = merged.split("-")[0]
+print("[INFO] Recent merge was a "+merged + " branch into " + merged_into)
+if merged in bump_branches:
+    # replace version file with what is in develop
+    versionFile = open("version.txt","r")
+    version = versionFile.readline()
+    versionFile.close()
+    majMinFeat = version.split('.')
+    # update version number and change
+    versionFile = open("version.txt","w")
+    if merged == "realease":
+        majMinFeat[0] = str(int(majMinFeat[0]) +1)
+        majMinFeat[1] = '0'
+        majMinFeat[2] = '0'
+    if merged == 'feature':
+        majMinFeat[1] = str(int(majMinFeat[1]) +1)
+    elif merged == 'patch':
+        majMinFeat[2] = str(int(majMinFeat[2]) +1)
+    versionFile.write('.'.join(majMinFeat))
+    versionFile.close()
+    out('git add version.txt')
+    out('git commit -m "Bump version remote"')
+    out('git push origin develop')
+else:
+    print("[INFO] Non version changing push.")
