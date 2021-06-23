@@ -5,11 +5,18 @@ def out(command):
     result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return (result.stdout).strip()
 
+
+
 # acceptable branch types list
 branchTypes = ["develop","master","release","feature","patch","private"]
 devBranches = ["release","feature","patch","private"]
 # obtain current branch name
 currentBranchName = out("git rev-parse --abbrev-ref HEAD")
+# Sync effort
+if currentBranchName == 'develop':
+    out('git fetch')
+    out('git checkout -m origin/develop version.txt')
+    print("[INFO] Up to date with develop.")
 print("[INFO] Working on: " +currentBranchName)
 # report hyphen error
 if currentBranchName != "develop" and currentBranchName != "master" and currentBranchName.find('-') == -1:
