@@ -44,8 +44,8 @@ if merged in bump_branches:
     versionFile.write('.'.join(majMinFeat))
     versionFile.close()
     out('git add version.txt')
-    out('git stash')
+    #out('git stash')
     out('git commit -m "Bump version remote"')
-    #out('git push origin develop')
+    out('git push origin develop')
 else:
     print("[INFO] Non version changing push.")
