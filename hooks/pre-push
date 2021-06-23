@@ -13,7 +13,7 @@ print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
 bumpBranches = ["realease",'feature','patch']
 branchType = merged_branch_name.split('-')[0]
 '''
-
+'''
 print("[INFO] Pre-push")
 versionFile = open("version.txt","r")
 version_local = (versionFile.readline()).strip()
@@ -34,7 +34,7 @@ if version_local != version_remote:
     sys.exit(1)
 print("[INFO] Versions match.")
 sys.exit(0)
-
+'''
 '''
 if branch_name == "develop" and branchType in bumpBranches:
     # replace version file with what is in develop
