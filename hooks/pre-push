@@ -29,6 +29,7 @@ if version_local != version_remote:
     print("[ABORT] Remote version is: "+str(version_remote))
     print("[HINT] Local version has been updated. Try:\n\tgit add version.txt\n\tgit commit -m 'Fix local v'\n\tgit xpush origin develop")
     sys.exit(1)
+print("[INFO] Versions match.")
 sys.exit(0)
 '''
 if branch_name == "develop" and branchType in bumpBranches:
