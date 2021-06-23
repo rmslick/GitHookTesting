@@ -7,7 +7,7 @@ def out(command):
 
 arg_list = ' '.join(sys.argv[1:])
 
-r_val = out('git push '+arg_list)
+out('git push '+arg_list)
 print(out("$?"))
 print("returned")
 bump_branches = ["release","feature","patch"]
