@@ -12,6 +12,9 @@ print("[INFO] pre-push git hook invoked.")
 print("[INFO] Merged "+ merged_branch_name  +" into  "+ branch_name)
 bumpBranches = ["realease",'feature','patch']
 branchType = merged_branch_name.split('-')[0]
+out('git fetch')
+out('git checkout -m origin/develop version.txt')
+
 '''
 if branch_name == "develop" and branchType in bumpBranches:
     # replace version file with what is in develop
