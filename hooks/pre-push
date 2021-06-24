@@ -27,9 +27,16 @@ versionFile = open("version.txt","r")
 version_remote = (versionFile.readline()).strip()
 versionFile.close()
 out("git checkout HEAD version.txt")
+remotesemvar = version_remote.split('.')
+localsemvar = version_local.split('.')
+k = True
+# check if local is ahead
+for i in range(len(remotesemvar)):
+    if remotesemvar[i] != localsemvar[i]:
+        if int(remotesemvar[i]) < int(localsemvar[i]):
+            k = False
 
-print("[INFO] "+version_remote)
-if version_local != version_remote:
+if version_local != version_remote and k:
     print("[ABORT] PUSH ABORTED: Version file mismatch.")
     print("[ABORT] Local version is: "+str(version_local).strip())
     print("[ABORT] Remote version is: "+str(version_remote))
